@@ -16,6 +16,7 @@ _COLUMNS = ['Date', 'CountryName', 'Confirmed', 'Deaths']
 df = data.get_data()
 
 app = dash.Dash(__name__)
+app.title = 'Coviz - A Covid-19 data visualization'
 server = app.server
 
 app.layout = \
