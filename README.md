@@ -1,4 +1,5 @@
 # covid-19-visualization
+Currently served at [https://coviz.herokuapp.com/](https://coviz.herokuapp.com/)
 
 ## TODO
 - Cache data
