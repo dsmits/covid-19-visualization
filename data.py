@@ -5,7 +5,7 @@ import requests
 import io
 _logger = logging.getLogger(__name__)
 
-_WORLD_DATA_URL = 'https://raw.githubusercontent.com/open-covid-19/data/master/output/world_latest.csv'
+_WORLD_DATA_URL = 'https://raw.githubusercontent.com/open-covid-19/data/master/output/world.csv'
 _WORLD_DATA_DESTINATION = 'data/world_latest.csv'
 _OK_STATUS = 200
 
