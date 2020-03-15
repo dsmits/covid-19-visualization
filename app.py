@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import sys
+
 import dash
 import dash_html_components as html
 import dash_table
 
 import data
+
+DEFAULT_PORT = 8050
 
 df = data.get_data()
 
@@ -20,5 +24,15 @@ app.layout = html.Div(children=[
 
 ])
 
+
+def main():
+    port = DEFAULT_PORT
+    if len(sys.argv) > 1:
+        port = sys.argv[1]
+        port = int(port)
+
+    app.run_server(debug=True, port=port)
+
+
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    main()
