@@ -2,5 +2,5 @@
 
 ## TODO
 - Cache data
-- Interactive table
-- Interactive graph
+- Graph with logaritmic scale
+- Table and graph with new cases instead of total cases
