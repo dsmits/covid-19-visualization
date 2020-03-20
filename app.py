@@ -9,6 +9,7 @@ import pandas as pd
 from dash.dependencies import Output, Input
 
 import data
+import numpy as np
 
 _DEFAULT_PORT = 8050
 _COLUMNS = ['Date', 'CountryName', 'Confirmed', 'Deaths']
@@ -40,9 +41,17 @@ app.layout = \
 
                  dcc.Graph(
                      id='coviz-graph'
-                 )
+                 ),
+                 dcc.Interval('interval-component',
+                              interval=1000*3600)
              ])
 
+
+@app.callback(Output('coviz-table', 'data'),
+              [Input('interval-component', 'n_intervals')])
+def update_data(interval):
+    df = data.get_data()
+    return df.to_dict('records')
 
 @app.callback(
     Output('coviz-graph', 'figure'),
@@ -64,6 +73,16 @@ def display_output(rows):
                  'y': agg['Deaths'],
                  'type': 'line',
                  'name': 'Deaths'
+                 },
+                {'x': agg.index,
+                 'y': np.log(agg['Confirmed']),
+                 'type': 'line',
+                 'name': 'Logaritmic confirmed cases'
+                 },
+                {'x': agg.index,
+                 'y': np.log(agg['Deaths']),
+                 'type': 'line',
+                 'name': 'Logaritmic deaths'
                  }
             ]
     }

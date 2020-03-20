@@ -1,8 +1,10 @@
+import numpy as np
+import io
 import logging
 
 import pandas as pd
 import requests
-import io
+
 _logger = logging.getLogger(__name__)
 
 _WORLD_DATA_URL = 'https://raw.githubusercontent.com/open-covid-19/data/master/output/world.csv'
@@ -23,4 +25,7 @@ def download_data() -> io.BytesIO:
 
 
 def get_data() -> pd.DataFrame:
-    return pd.read_csv(download_data())
+    df = pd.read_csv(download_data())
+
+    return df
+
