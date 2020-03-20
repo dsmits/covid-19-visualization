@@ -43,7 +43,7 @@ app.layout = \
                      id='coviz-graph'
                  ),
                  dcc.Interval('interval-component',
-                              interval=1000*3600)
+                              interval=1000 * 3600)
              ])
 
 
@@ -52,6 +52,7 @@ app.layout = \
 def update_data(interval):
     df = data.get_data()
     return df.to_dict('records')
+
 
 @app.callback(
     Output('coviz-graph', 'figure'),
