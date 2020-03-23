@@ -1,4 +1,3 @@
-import numpy as np
 import io
 import logging
 
@@ -7,9 +6,10 @@ import requests
 
 _logger = logging.getLogger(__name__)
 
-_WORLD_DATA_URL = 'https://raw.githubusercontent.com/open-covid-19/data/master/output/world.csv'
+_WORLD_DATA_URL = 'https://raw.githubusercontent.com/open-covid-19/data/master/output/data.csv'
 _WORLD_DATA_DESTINATION = 'data/world_latest.csv'
 _OK_STATUS = 200
+_DATA_FILE = 'data.csv'
 
 
 def download_data() -> io.BytesIO:
@@ -25,7 +25,20 @@ def download_data() -> io.BytesIO:
 
 
 def get_data() -> pd.DataFrame:
-    df = pd.read_csv(download_data())
+    try:
+        content = download_data()
+        df = pd.read_csv(content)
+    except Exception as e:
+        df = load_cache()
+    # compute_diff(df)
 
     return df
 
+
+def store_data(content):
+    with open(_DATA_FILE, 'w') as f:
+        f.writelines(content)
+
+
+def load_cache() -> pd.DataFrame:
+    return pd.read_csv(_DATA_FILE)
