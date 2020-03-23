@@ -41,4 +41,5 @@ def store_data(content):
 
 
 def load_cache() -> pd.DataFrame:
+    logger.info('Loading data from cache')
     return pd.read_csv(_DATA_FILE)
